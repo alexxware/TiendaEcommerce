@@ -1,0 +1,6 @@
+@TiendaPuntoVenta_HostAddress = http://localhost:5296
+
+GET {{TiendaPuntoVenta_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

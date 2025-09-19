@@ -1,3 +1,4 @@
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using TiendaPuntoVenta.DTOs;
 using TiendaPuntoVenta.Service;
@@ -8,21 +9,31 @@ namespace TiendaPuntoVenta.Controllers;
 [Route("api/[controller]")]
 public class UserController : ControllerBase
 {
-    private IUserService _userService;
+    private readonly IUserService _userService;
+    private readonly IValidator<InsertUserDto> _validatorInsertUser;
 
-    public UserController(IUserService userService)
+    public UserController(IUserService userService,  IValidator<InsertUserDto> validatorInsertUser)
     {
         _userService = userService;
+        _validatorInsertUser = validatorInsertUser;
     }
     
-    [HttpPost]
+    [HttpPost("Register")]
     public async Task<IActionResult> AddUser([FromBody] InsertUserDto user)
     {
-        var res = await _userService.AddUser(user);
-        if (res)
+        var validationResult = await _validatorInsertUser.ValidateAsync(user);
+        if (validationResult.IsValid)
         {
-            return Ok(new { Message = "User Added Successfully" });
+            var res = await _userService.AddUser(user);
+            if (res)
+            {
+                return Ok(new { Message = "User Added Successfully" });
+            }
+            return BadRequest();
         }
-        return BadRequest();
+        
+        return BadRequest(validationResult.Errors);
+        
     }
+
 }

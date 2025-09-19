@@ -1,12 +1,28 @@
 using Microsoft.AspNetCore.Mvc;
+using TiendaPuntoVenta.DTOs;
+using TiendaPuntoVenta.Service;
 
 namespace TiendaPuntoVenta.Controllers;
 
-public class UserController : Controller
+[ApiController]
+[Route("api/[controller]")]
+public class UserController : ControllerBase
 {
-    // GET
-    public IActionResult Index()
+    private IUserService _userService;
+
+    public UserController(IUserService userService)
     {
-        return View();
+        _userService = userService;
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> AddUser([FromBody] InsertUserDto user)
+    {
+        var res = await _userService.AddUser(user);
+        if (res)
+        {
+            return Ok(new { Message = "User Added Successfully" });
+        }
+        return BadRequest();
     }
 }

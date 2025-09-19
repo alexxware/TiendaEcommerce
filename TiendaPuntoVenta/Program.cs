@@ -1,16 +1,26 @@
 using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
+using TiendaPuntoVenta.Automappers;
+using TiendaPuntoVenta.Models;
+using TiendaPuntoVenta.Repository;
+using TiendaPuntoVenta.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<IUserService, UserService>();
+
+//Repository
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+//Automapping
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 //Inyeccion de la referencia a la BD
-/*
-builder.Services.AddDbContext<PuntoVentaDBContext>(options =>
+builder.Services.AddDbContext<StoreDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("StoreConnection"));
-});*/
+});
 
 //no permitir parametros de más en el endpoint
 builder.Services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(options =>

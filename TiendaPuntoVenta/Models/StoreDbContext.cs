@@ -15,9 +15,6 @@ public partial class StoreDbContext : DbContext
     {
     }
 
-    public virtual DbSet<Beer> Beers { get; set; }
-
-    public virtual DbSet<Brand> Brands { get; set; }
 
     public virtual DbSet<TblPedido> TblPedidos { get; set; }
 
@@ -30,14 +27,6 @@ public partial class StoreDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Beer>(entity =>
-        {
-            entity.HasIndex(e => e.BrandId, "IX_Beers_BrandId");
-
-            entity.Property(e => e.Alcohol).HasColumnType("decimal(18, 2)");
-
-            entity.HasOne(d => d.Brand).WithMany(p => p.Beers).HasForeignKey(d => d.BrandId);
-        });
 
         modelBuilder.Entity<TblPedido>(entity =>
         {

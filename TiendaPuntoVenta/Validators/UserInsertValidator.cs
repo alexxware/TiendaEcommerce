@@ -13,6 +13,5 @@ public class UserInsertValidator: AbstractValidator<InsertUserDto>
         RuleFor(user => user.Email).EmailAddress().WithMessage("Email address format is invalid");
         RuleFor(user => user.Password).NotEmpty().WithMessage("Password is required");
         RuleFor(user => user.Password).Length(6, 16).WithMessage("Password must be between 6 and 16 characters");
-        
     }
 }

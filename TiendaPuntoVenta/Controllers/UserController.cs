@@ -11,11 +11,16 @@ public class UserController : ControllerBase
 {
     private readonly IUserService _userService;
     private readonly IValidator<InsertUserDto> _validatorInsertUser;
+    private readonly IValidator<LoginUserDto> _validatorLoginUser;
 
-    public UserController(IUserService userService,  IValidator<InsertUserDto> validatorInsertUser)
+    public UserController(
+        IUserService userService,  
+        IValidator<InsertUserDto> validatorInsertUser,
+        IValidator<LoginUserDto> validatorLoginUser)
     {
         _userService = userService;
         _validatorInsertUser = validatorInsertUser;
+        _validatorLoginUser = validatorLoginUser;
     }
     
     [HttpPost("Register")]
@@ -34,6 +39,23 @@ public class UserController : ControllerBase
         
         return BadRequest(validationResult.Errors);
         
+    }
+    
+    [HttpPost("Login")]
+    public async Task<IActionResult> LoginUser([FromBody] LoginUserDto user)
+    {
+        var validationResult = await _validatorLoginUser.ValidateAsync(user);
+        if (validationResult.IsValid)
+        {
+            var res = await _userService.ValidateUser(user);
+            if (res)
+            {
+                return Ok(new { Message = "Login Successfully" });
+            }
+            return Unauthorized("Username or password is incorrect");
+        }
+
+        return BadRequest(validationResult.Errors);
     }
 
 }

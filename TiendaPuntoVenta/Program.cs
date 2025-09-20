@@ -21,6 +21,7 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 //Validators
 builder.Services.AddScoped<IValidator<InsertUserDto>, UserInsertValidator>();
+builder.Services.AddScoped<IValidator<LoginUserDto>, UserLoginValidator>();
 
 //Inyeccion de la referencia a la BD
 builder.Services.AddDbContext<StoreDbContext>(options =>

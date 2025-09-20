@@ -1,7 +1,9 @@
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TiendaPuntoVenta.DTOs;
 using TiendaPuntoVenta.Service;
+using TiendaPuntoVenta.Service.Auth;
 
 namespace TiendaPuntoVenta.Controllers;
 
@@ -48,14 +50,22 @@ public class UserController : ControllerBase
         if (validationResult.IsValid)
         {
             var res = await _userService.ValidateUser(user);
-            if (res)
+            if (!string.IsNullOrEmpty(res.Token))
             {
-                return Ok(new { Message = "Login Successfully" });
+                //var token = _jwtHelper.GenerateToken
+                return Ok(new { Message = "Login Successfully", Token = res.Token });
             }
             return Unauthorized("Username or password is incorrect");
         }
 
         return BadRequest(validationResult.Errors);
+    }
+
+    [Authorize]
+    [HttpGet("privado")]
+    public IActionResult Privado()
+    {
+        return Ok("Solo usuarios con JWT válido pueden ver esto");
     }
 
 }

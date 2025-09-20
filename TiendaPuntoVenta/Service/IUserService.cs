@@ -5,5 +5,5 @@ namespace TiendaPuntoVenta.Service;
 public interface IUserService
 {
     Task<bool> AddUser(InsertUserDto user);
-    Task<bool> ValidateUser(LoginUserDto user);
+    Task<ResponseLoginDto> ValidateUser(LoginUserDto user);
 }

@@ -1,0 +1,126 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\aleja\\Documents\\NET\\Tienda\\TiendaEcommerce\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{3D0E34C8-AC34-4957-B116-7897A045312B}|TiendaPuntoVenta\\TiendaPuntoVenta.csproj|c:\\users\\aleja\\documents\\net\\tienda\\tiendaecommerce\\tiendapuntoventa\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D0E34C8-AC34-4957-B116-7897A045312B}|TiendaPuntoVenta\\TiendaPuntoVenta.csproj|solutionrelative:tiendapuntoventa\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D0E34C8-AC34-4957-B116-7897A045312B}|TiendaPuntoVenta\\TiendaPuntoVenta.csproj|c:\\users\\aleja\\documents\\net\\tienda\\tiendaecommerce\\tiendapuntoventa\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D0E34C8-AC34-4957-B116-7897A045312B}|TiendaPuntoVenta\\TiendaPuntoVenta.csproj|solutionrelative:tiendapuntoventa\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D0E34C8-AC34-4957-B116-7897A045312B}|TiendaPuntoVenta\\TiendaPuntoVenta.csproj|c:\\users\\aleja\\documents\\net\\tienda\\tiendaecommerce\\tiendapuntoventa\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3D0E34C8-AC34-4957-B116-7897A045312B}|TiendaPuntoVenta\\TiendaPuntoVenta.csproj|solutionrelative:tiendapuntoventa\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D0E34C8-AC34-4957-B116-7897A045312B}|TiendaPuntoVenta\\TiendaPuntoVenta.csproj|c:\\users\\aleja\\documents\\net\\tienda\\tiendaecommerce\\tiendapuntoventa\\service\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D0E34C8-AC34-4957-B116-7897A045312B}|TiendaPuntoVenta\\TiendaPuntoVenta.csproj|solutionrelative:tiendapuntoventa\\service\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D0E34C8-AC34-4957-B116-7897A045312B}|TiendaPuntoVenta\\TiendaPuntoVenta.csproj|c:\\users\\aleja\\documents\\net\\tienda\\tiendaecommerce\\tiendapuntoventa\\service\\auth\\jwthelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D0E34C8-AC34-4957-B116-7897A045312B}|TiendaPuntoVenta\\TiendaPuntoVenta.csproj|solutionrelative:tiendapuntoventa\\service\\auth\\jwthelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D0E34C8-AC34-4957-B116-7897A045312B}|TiendaPuntoVenta\\TiendaPuntoVenta.csproj|c:\\users\\aleja\\documents\\net\\tienda\\tiendaecommerce\\tiendapuntoventa\\service\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D0E34C8-AC34-4957-B116-7897A045312B}|TiendaPuntoVenta\\TiendaPuntoVenta.csproj|solutionrelative:tiendapuntoventa\\service\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\aleja\\Documents\\NET\\Tienda\\TiendaEcommerce\\TiendaPuntoVenta\\appsettings.json",
+              "RelativeDocumentMoniker": "TiendaPuntoVenta\\appsettings.json",
+              "ToolTip": "C:\\Users\\aleja\\Documents\\NET\\Tienda\\TiendaEcommerce\\TiendaPuntoVenta\\appsettings.json",
+              "RelativeToolTip": "TiendaPuntoVenta\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-09-20T03:10:29.765Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "JwtHelper.cs",
+              "DocumentMoniker": "C:\\Users\\aleja\\Documents\\NET\\Tienda\\TiendaEcommerce\\TiendaPuntoVenta\\Service\\Auth\\JwtHelper.cs",
+              "RelativeDocumentMoniker": "TiendaPuntoVenta\\Service\\Auth\\JwtHelper.cs",
+              "ToolTip": "C:\\Users\\aleja\\Documents\\NET\\Tienda\\TiendaEcommerce\\TiendaPuntoVenta\\Service\\Auth\\JwtHelper.cs",
+              "RelativeToolTip": "TiendaPuntoVenta\\Service\\Auth\\JwtHelper.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA8AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-20T03:09:36.134Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\aleja\\Documents\\NET\\Tienda\\TiendaEcommerce\\TiendaPuntoVenta\\Program.cs",
+              "RelativeDocumentMoniker": "TiendaPuntoVenta\\Program.cs",
+              "ToolTip": "C:\\Users\\aleja\\Documents\\NET\\Tienda\\TiendaEcommerce\\TiendaPuntoVenta\\Program.cs",
+              "RelativeToolTip": "TiendaPuntoVenta\\Program.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAADkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-20T02:39:51.192Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "C:\\Users\\aleja\\Documents\\NET\\Tienda\\TiendaEcommerce\\TiendaPuntoVenta\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "TiendaPuntoVenta\\Controllers\\UserController.cs",
+              "ToolTip": "C:\\Users\\aleja\\Documents\\NET\\Tienda\\TiendaEcommerce\\TiendaPuntoVenta\\Controllers\\UserController.cs",
+              "RelativeToolTip": "TiendaPuntoVenta\\Controllers\\UserController.cs",
+              "ViewState": "AgIAACgAAAAAAAAAAAAowEAAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-20T02:28:47.212Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "C:\\Users\\aleja\\Documents\\NET\\Tienda\\TiendaEcommerce\\TiendaPuntoVenta\\Service\\UserService.cs",
+              "RelativeDocumentMoniker": "TiendaPuntoVenta\\Service\\UserService.cs",
+              "ToolTip": "C:\\Users\\aleja\\Documents\\NET\\Tienda\\TiendaEcommerce\\TiendaPuntoVenta\\Service\\UserService.cs",
+              "RelativeToolTip": "TiendaPuntoVenta\\Service\\UserService.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAowDIAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-20T02:46:57.345Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IUserService.cs",
+              "DocumentMoniker": "C:\\Users\\aleja\\Documents\\NET\\Tienda\\TiendaEcommerce\\TiendaPuntoVenta\\Service\\IUserService.cs",
+              "RelativeDocumentMoniker": "TiendaPuntoVenta\\Service\\IUserService.cs",
+              "ToolTip": "C:\\Users\\aleja\\Documents\\NET\\Tienda\\TiendaEcommerce\\TiendaPuntoVenta\\Service\\IUserService.cs",
+              "RelativeToolTip": "TiendaPuntoVenta\\Service\\IUserService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-20T02:55:39.268Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

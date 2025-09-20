@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using TiendaPuntoVenta.DTOs;
 using TiendaPuntoVenta.Models;
 using TiendaPuntoVenta.Repository;
+using TiendaPuntoVenta.Service.Auth;
 
 namespace TiendaPuntoVenta.Service;
 
@@ -10,10 +11,13 @@ public class UserService:IUserService
 {
     private readonly IUserRepository  _userRepository;
     private readonly IMapper _mapper;
-    public UserService(IUserRepository userRepository, IMapper mapper)
+    private readonly IJwtHelper _jwtHelper;
+
+    public UserService(IUserRepository userRepository, IMapper mapper, IJwtHelper jwt)
     {
         _userRepository = userRepository;
         _mapper = mapper;
+        _jwtHelper = jwt;
     }
     
     public async Task<bool> AddUser(InsertUserDto user)
@@ -34,15 +38,25 @@ public class UserService:IUserService
         }
     }
 
-    public async Task<bool> ValidateUser(LoginUserDto user)
+    public async Task<ResponseLoginDto> ValidateUser(LoginUserDto user)
     {
         var userDb = await _userRepository.SelectUserByEmail(user.Email!);
-        if (userDb is null)
+        if (userDb is null || !VerifyPassword(user.Password!, userDb.Clave!))
         {
-            return false;
+            return new ResponseLoginDto
+            {
+                Email = string.Empty,
+                Token = string.Empty
+            };
         }
 
-        return VerifyPassword(user.Password!, userDb.Clave!);
+        var token = _jwtHelper.GenerateToken(userId: userDb.Id.ToString(), email: userDb.Correo!, role: "User");
+
+
+        return new ResponseLoginDto {
+            Email = userDb.Correo,
+            Token = token
+        };
     }
 
     private static bool VerifyPassword(string loginPassword, string hashPassword)

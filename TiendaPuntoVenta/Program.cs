@@ -1,17 +1,47 @@
+using System.Text;
 using System.Text.Json.Serialization;
 using FluentValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using TiendaPuntoVenta.Automappers;
 using TiendaPuntoVenta.DTOs;
 using TiendaPuntoVenta.Models;
 using TiendaPuntoVenta.Repository;
 using TiendaPuntoVenta.Service;
+using TiendaPuntoVenta.Service.Auth;
 using TiendaPuntoVenta.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+//claves para jwt
+var secretKey = builder.Configuration["Jwt:Key"];
+var issuer = builder.Configuration["Jwt:Issuer"];
+var audience = builder.Configuration["Jwt:Audience"];
+
+//configuramos la autenticacion
+builder.Services.AddAuthentication(option =>
+{
+    option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = issuer,
+        ValidAudience = audience,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
+    };
+});
+builder.Services.AddAuthorization();
+
+// Services
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IJwtHelper, JwtHelper>();
 
 //Repository
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -51,6 +81,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -1,3 +1,4 @@
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using TiendaPuntoVenta.DTOs;
 using TiendaPuntoVenta.Service;
@@ -8,21 +9,53 @@ namespace TiendaPuntoVenta.Controllers;
 [Route("api/[controller]")]
 public class UserController : ControllerBase
 {
-    private IUserService _userService;
+    private readonly IUserService _userService;
+    private readonly IValidator<InsertUserDto> _validatorInsertUser;
+    private readonly IValidator<LoginUserDto> _validatorLoginUser;
 
-    public UserController(IUserService userService)
+    public UserController(
+        IUserService userService,  
+        IValidator<InsertUserDto> validatorInsertUser,
+        IValidator<LoginUserDto> validatorLoginUser)
     {
         _userService = userService;
+        _validatorInsertUser = validatorInsertUser;
+        _validatorLoginUser = validatorLoginUser;
     }
     
-    [HttpPost]
+    [HttpPost("Register")]
     public async Task<IActionResult> AddUser([FromBody] InsertUserDto user)
     {
-        var res = await _userService.AddUser(user);
-        if (res)
+        var validationResult = await _validatorInsertUser.ValidateAsync(user);
+        if (validationResult.IsValid)
         {
-            return Ok(new { Message = "User Added Successfully" });
+            var res = await _userService.AddUser(user);
+            if (res)
+            {
+                return Ok(new { Message = "User Added Successfully" });
+            }
+            return BadRequest();
         }
-        return BadRequest();
+        
+        return BadRequest(validationResult.Errors);
+        
     }
+    
+    [HttpPost("Login")]
+    public async Task<IActionResult> LoginUser([FromBody] LoginUserDto user)
+    {
+        var validationResult = await _validatorLoginUser.ValidateAsync(user);
+        if (validationResult.IsValid)
+        {
+            var res = await _userService.ValidateUser(user);
+            if (res)
+            {
+                return Ok(new { Message = "Login Successfully" });
+            }
+            return Unauthorized("Username or password is incorrect");
+        }
+
+        return BadRequest(validationResult.Errors);
+    }
+
 }

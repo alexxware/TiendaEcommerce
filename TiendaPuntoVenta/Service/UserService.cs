@@ -59,6 +59,23 @@ public class UserService:IUserService
         };
     }
 
+    public async Task<ResponseLoginDto> ValidateAdmin(LoginUserDto user)
+    {
+        var userDb = await _userRepository.SelectUserByEmail(user.Email!);
+        if (userDb is not null && VerifyPassword(user.Password!, userDb.Clave!))
+        {
+            if (userDb.Administrador != "admin") return new ResponseLoginDto();
+            var token = _jwtHelper.GenerateToken(userDb.Id.ToString(), userDb.Correo!, role: "Admin");
+            return new ResponseLoginDto
+            {
+                Email = userDb.Correo,
+                Token = token
+            };
+        }
+
+        return new ResponseLoginDto();
+    }
+
     private static bool VerifyPassword(string loginPassword, string hashPassword)
     {
         return BCrypt.Net.BCrypt.Verify(loginPassword, hashPassword);

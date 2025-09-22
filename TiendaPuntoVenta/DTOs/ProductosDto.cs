@@ -8,6 +8,4 @@ public class ProductosDto
     public decimal UnitPrice { get; set; }
     public string Image { get; set; }
     public int Stock { get; set; }
-    public string Status { get; set; }
-    public DateTime Captured { get; set; }
 }

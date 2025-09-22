@@ -9,13 +9,13 @@ namespace TiendaPuntoVenta.Service;
 
 public class UserService:IUserService
 {
-    private readonly IUserRepository  _userRepository;
+    private readonly ITiendaRepository  _tiendaRepository;
     private readonly IMapper _mapper;
     private readonly IJwtHelper _jwtHelper;
 
-    public UserService(IUserRepository userRepository, IMapper mapper, IJwtHelper jwt)
+    public UserService(ITiendaRepository tiendaRepository, IMapper mapper, IJwtHelper jwt)
     {
-        _userRepository = userRepository;
+        _tiendaRepository = tiendaRepository;
         _mapper = mapper;
         _jwtHelper = jwt;
     }
@@ -28,8 +28,8 @@ public class UserService:IUserService
             
             var userMapped = _mapper.Map<TblUsuario>(user);
 
-            await _userRepository.Add(userMapped);
-            await _userRepository.Save();
+            await _tiendaRepository.Add(userMapped);
+            await _tiendaRepository.Save();
             return true;
         }
         catch
@@ -40,7 +40,7 @@ public class UserService:IUserService
 
     public async Task<ResponseLoginDto> ValidateUser(LoginUserDto user)
     {
-        var userDb = await _userRepository.SelectUserByEmail(user.Email!);
+        var userDb = await _tiendaRepository.SelectUserByEmail(user.Email!);
         if (userDb is null || !VerifyPassword(user.Password!, userDb.Clave!))
         {
             return new ResponseLoginDto
@@ -61,7 +61,7 @@ public class UserService:IUserService
 
     public async Task<ResponseLoginDto> ValidateAdmin(LoginUserDto user)
     {
-        var userDb = await _userRepository.SelectUserByEmail(user.Email!);
+        var userDb = await _tiendaRepository.SelectUserByEmail(user.Email!);
         if (userDb is not null && VerifyPassword(user.Password!, userDb.Clave!))
         {
             if (userDb.Administrador != "admin") return new ResponseLoginDto();

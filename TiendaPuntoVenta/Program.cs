@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using TiendaPuntoVenta.Automappers;
 using TiendaPuntoVenta.DTOs;
@@ -10,6 +11,7 @@ using TiendaPuntoVenta.Models;
 using TiendaPuntoVenta.Repository;
 using TiendaPuntoVenta.Service;
 using TiendaPuntoVenta.Service.Auth;
+using TiendaPuntoVenta.Service.ProductsService;
 using TiendaPuntoVenta.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -40,11 +42,13 @@ builder.Services.AddAuthentication(option =>
 builder.Services.AddAuthorization();
 
 // Services
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IJwtHelper, JwtHelper>();
 
 //Repository
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ITiendaRepository, TiendaRepository>();
 
 //Automapping
 builder.Services.AddAutoMapper(typeof(MappingProfile));
@@ -83,6 +87,13 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+//usar archivos estaticos
+app.UseStaticFiles( new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath, "images")),
+    RequestPath = "/images"
+});
 
 app.MapControllers();
 

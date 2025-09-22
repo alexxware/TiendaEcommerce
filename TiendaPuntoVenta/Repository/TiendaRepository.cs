@@ -4,11 +4,11 @@ using TiendaPuntoVenta.Models;
 
 namespace TiendaPuntoVenta.Repository;
 
-public class UserRepository: IUserRepository
+public class TiendaRepository: ITiendaRepository
 {
     private readonly StoreDbContext _context;
 
-    public UserRepository(StoreDbContext context)
+    public TiendaRepository(StoreDbContext context)
     {
         _context = context;
     }
@@ -21,6 +21,18 @@ public class UserRepository: IUserRepository
     public async Task<TblUsuario?> SelectUserByEmail(string email)
     {
         return await _context.TblUsuarios.Where(e => e.Correo == email).FirstOrDefaultAsync();
+    }
+
+    public async Task<(List<TblProducto>, int totalProductos)> GetAllProductos(int page, int pageSize)
+    {
+        var listaProductos = await _context.TblProductos
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        var total = await _context.TblProductos.CountAsync();
+
+        return (listaProductos, total);
     }
 
     public async Task Save()

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TiendaPuntoVenta.DTOs;
+using TiendaPuntoVenta.DTOs.ProductsDto;
 using TiendaPuntoVenta.Service.ProductsService;
 
 namespace TiendaPuntoVenta.Controllers;
@@ -25,5 +26,12 @@ public class ProductController : ControllerBase
             totalProductos = total
         };
         return response;
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpPost]
+    public async Task<IActionResult> AddProduct(InsertProductosDto producto)
+    {
+        return Ok();
     }
 }

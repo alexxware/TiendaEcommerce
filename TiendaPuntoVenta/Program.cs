@@ -7,6 +7,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using TiendaPuntoVenta.Automappers;
 using TiendaPuntoVenta.DTOs;
+using TiendaPuntoVenta.DTOs.ProductsDto;
 using TiendaPuntoVenta.Models;
 using TiendaPuntoVenta.Repository;
 using TiendaPuntoVenta.Service;
@@ -56,6 +57,8 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 //Validators
 builder.Services.AddScoped<IValidator<InsertUserDto>, UserInsertValidator>();
 builder.Services.AddScoped<IValidator<LoginUserDto>, UserLoginValidator>();
+builder.Services.AddScoped<IValidator<InsertProductosDto>, ProductInsertValidator>();
+builder.Services.AddScoped<IValidator<ProductosDto>, ProductoValidator>();
 
 //Inyeccion de la referencia a la BD
 builder.Services.AddDbContext<StoreDbContext>(options =>

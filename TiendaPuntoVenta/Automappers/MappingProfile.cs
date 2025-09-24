@@ -1,5 +1,6 @@
 using AutoMapper;
 using TiendaPuntoVenta.DTOs;
+using TiendaPuntoVenta.DTOs.ProductsDto;
 using TiendaPuntoVenta.Models;
 
 namespace TiendaPuntoVenta.Automappers;
@@ -19,6 +20,12 @@ public class MappingProfile: Profile
             .ForMember(from => from.Description, to => to.MapFrom(t => t.Descripcion))
             .ForMember(from => from.UnitPrice, to => to.MapFrom(t => t.PrecioUnitario))
             .ForMember(from => from.Image, to => to.MapFrom(t => t.Imagen))
+            .ForMember(from => from.Stock, to => to.MapFrom(t => t.Stock));
+
+        CreateMap<InsertProductosDto, TblProducto>()
+            .ForMember(from => from.Nombre, to => to.MapFrom(t => t.Name))
+            .ForMember(from => from.Descripcion, to => to.MapFrom(t => t.Description))
+            .ForMember(from => from.PrecioUnitario, to => to.MapFrom(t => t.UnitPrice))
             .ForMember(from => from.Stock, to => to.MapFrom(t => t.Stock));
     }
 }

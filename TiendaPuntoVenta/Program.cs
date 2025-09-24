@@ -12,6 +12,7 @@ using TiendaPuntoVenta.Models;
 using TiendaPuntoVenta.Repository;
 using TiendaPuntoVenta.Service;
 using TiendaPuntoVenta.Service.Auth;
+using TiendaPuntoVenta.Service.Orders;
 using TiendaPuntoVenta.Service.ProductsService;
 using TiendaPuntoVenta.Validators;
 
@@ -46,6 +47,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IJwtHelper, JwtHelper>();
 
 //Repository

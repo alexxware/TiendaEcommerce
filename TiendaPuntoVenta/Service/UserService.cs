@@ -43,19 +43,20 @@ public class UserService:IUserService
         var userDb = await _tiendaRepository.SelectUserByEmail(user.Email!);
         if (userDb is null || !VerifyPassword(user.Password!, userDb.Clave!))
         {
-            return new ResponseLoginDto
-            {
-                Email = string.Empty,
-                Token = string.Empty
-            };
+            return new ResponseLoginDto();
         }
 
         var token = _jwtHelper.GenerateToken(userId: userDb.Id.ToString(), email: userDb.Correo!, role: "User");
 
 
         return new ResponseLoginDto {
-            Email = userDb.Correo,
-            Token = token
+            Token = token,
+            User = new UserDto
+            {
+                Id = userDb.Id,
+                Usuario = userDb.Usuario,
+                Correo = userDb.Correo
+            }
         };
     }
 
@@ -68,8 +69,13 @@ public class UserService:IUserService
             var token = _jwtHelper.GenerateToken(userDb.Id.ToString(), userDb.Correo!, role: "Admin");
             return new ResponseLoginDto
             {
-                Email = userDb.Correo,
-                Token = token
+                Token = token,
+                User = new UserDto
+                {
+                    Id = userDb.Id,
+                    Usuario = userDb.Usuario,
+                    Correo = userDb.Correo
+                }
             };
         }
 

@@ -53,7 +53,7 @@ public class UserController : ControllerBase
             if (!string.IsNullOrEmpty(res.Token))
             {
                 //var token = _jwtHelper.GenerateToken
-                return Ok(new { Message = "Login Successfully", Token = res.Token });
+                return Ok(new { Token = res.Token, UserCurrent = res.User });
             }
             return Unauthorized("Username or password is incorrect");
         }
@@ -69,18 +69,10 @@ public class UserController : ControllerBase
         {
             var res = await _userService.ValidateAdmin(user);
             if (string.IsNullOrEmpty(res.Token)) return Unauthorized("Username or password is incorrect");
-            return Ok(new { Message = "Login Successfully", Token = res.Token });
+            return Ok(new { Token = res.Token, UserCurrent = res.User });
         }
 
         return BadRequest(validationResult.Errors);
     }
-
-    /*
-    [Authorize]
-    [HttpGet("privado")]
-    public IActionResult Privado()
-    {
-        return Ok("Solo usuarios con JWT valido pueden ver esto");
-    }*/
 
 }

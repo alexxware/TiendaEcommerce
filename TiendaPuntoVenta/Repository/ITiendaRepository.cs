@@ -13,5 +13,9 @@ public interface ITiendaRepository
     void UpdateProduct(TblProducto producto);
     Task<TblProducto?> SelectProductById(int id);
     void DeleteProduct(TblProducto producto);
+    void TakeOrder(TblPedido pedido);
+    Task BeginTransactionAsync();
+    Task CommitAsync();
+    Task RollbackAsync();
     Task Save();
 }

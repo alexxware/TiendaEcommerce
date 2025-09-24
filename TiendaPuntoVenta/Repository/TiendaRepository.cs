@@ -20,7 +20,7 @@ public class TiendaRepository: ITiendaRepository
 
     public async Task<TblUsuario?> SelectUserByEmail(string email)
     {
-        return await _context.TblUsuarios.Where(e => e.Correo == email).FirstOrDefaultAsync();
+        return await _context.TblUsuarios.Where(e => e.Correo == email && e.Estatus == null).FirstOrDefaultAsync();
     }
 
     public async Task<(List<TblProducto>, int totalProductos)> GetAllProductos(int page, int pageSize)
@@ -62,9 +62,28 @@ public class TiendaRepository: ITiendaRepository
 
     public void DeleteProduct(TblProducto producto)
     {
-        //_context.TblProductos.Remove(producto);
         _context.TblProductos.Attach(producto);
         _context.Entry(producto).State = EntityState.Modified;
+    }
+
+    public async void TakeOrder(TblPedido pedido)
+    {
+        await _context.TblPedidos.AddAsync(pedido);
+    }
+
+    public async Task BeginTransactionAsync()
+    {
+        await _context.Database.BeginTransactionAsync();
+    }
+
+    public async Task CommitAsync()
+    {
+        await _context.Database.CommitTransactionAsync();
+    }
+
+    public async Task RollbackAsync()
+    {
+        await _context.Database.RollbackTransactionAsync();
     }
 
     public async Task Save()

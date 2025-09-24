@@ -75,12 +75,4 @@ public class UserController : ControllerBase
         return BadRequest(validationResult.Errors);
     }
 
-    /*
-    [Authorize]
-    [HttpGet("privado")]
-    public IActionResult Privado()
-    {
-        return Ok("Solo usuarios con JWT valido pueden ver esto");
-    }*/
-
 }

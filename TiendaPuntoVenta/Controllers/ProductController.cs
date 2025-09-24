@@ -1,3 +1,4 @@
+using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TiendaPuntoVenta.DTOs;
@@ -11,9 +12,15 @@ namespace TiendaPuntoVenta.Controllers;
 public class ProductController : ControllerBase
 {
     private readonly IProductService _productService;
-    public ProductController(IProductService productService)
+    private readonly IValidator<InsertProductosDto> _validatorInsertProduct;
+    private readonly IValidator<ProductosDto> _validatorProduct;
+    public ProductController(IProductService productService,  
+        IValidator<InsertProductosDto> validatorInsertProduct,
+        IValidator<ProductosDto> validatorProduct)
     {
         _productService = productService;
+        _validatorInsertProduct = validatorInsertProduct;
+        _validatorProduct = validatorProduct;
     }
     
     [HttpGet]
@@ -30,8 +37,38 @@ public class ProductController : ControllerBase
 
     [Authorize(Roles = "Admin")]
     [HttpPost]
-    public async Task<IActionResult> AddProduct(InsertProductosDto producto)
+    public async Task<IActionResult> AddProduct([FromForm] InsertProductosDto producto, IFormFile? imageFile)
     {
-        return Ok();
+        var validationResult = await _validatorInsertProduct.ValidateAsync(producto);
+        if (!validationResult.IsValid) return BadRequest(validationResult.Errors);
+
+        var res = await _productService.AddProduct(producto, imageFile);
+        if (!res) return BadRequest();
+        return Ok(new { Message = "Product Added Successfully" });
+    }
+    
+    [Authorize(Roles = "Admin")]
+    [HttpPut]
+    public async Task<IActionResult> UpdateProduct([FromForm] ProductosDto producto,  IFormFile? imageFile)
+    {
+        var validationResult = await _validatorProduct.ValidateAsync(producto);
+        if (!validationResult.IsValid) return BadRequest(validationResult.Errors);
+        
+        var res = await _productService.UpdateProduct(producto, imageFile);
+        if (!res.Result) return BadRequest(res.Message);
+        
+        return Ok(new { res.Message });
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpDelete]
+    public async Task<IActionResult> DeleteProduct(int id)
+    {
+        if (id <= 0) return BadRequest("Id must be greater than zero");
+        
+        var  res = await _productService.DeleteProduct(id);
+        if(!res.Result) return BadRequest(res.Message);
+        
+        return Ok(new { res.Message });
     }
 }

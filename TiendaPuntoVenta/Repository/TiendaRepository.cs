@@ -25,14 +25,46 @@ public class TiendaRepository: ITiendaRepository
 
     public async Task<(List<TblProducto>, int totalProductos)> GetAllProductos(int page, int pageSize)
     {
-        var listaProductos = await _context.TblProductos
+        var query = _context.TblProductos.Where(p => p.Estatus == null);
+        var listaProductos = await query
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();
 
-        var total = await _context.TblProductos.CountAsync();
+        var total = await query.CountAsync();
 
         return (listaProductos, total);
+    }
+
+    public async Task<bool> AddProduct(TblProducto producto)
+    {
+        try
+        {
+            await _context.TblProductos.AddAsync(producto);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    public void UpdateProduct(TblProducto producto)
+    {
+        _context.TblProductos.Attach(producto);
+        _context.Entry(producto).State = EntityState.Modified;
+    }
+
+    public async Task<TblProducto?> SelectProductById(int id)
+    {
+        return await _context.TblProductos.FindAsync(id);
+    }
+
+    public void DeleteProduct(TblProducto producto)
+    {
+        //_context.TblProductos.Remove(producto);
+        _context.TblProductos.Attach(producto);
+        _context.Entry(producto).State = EntityState.Modified;
     }
 
     public async Task Save()
